@@ -1,0 +1,27 @@
+{
+  "name": "qa-automation-portfolio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Flornakasone/qa-automation-portfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Flornakasone/qa-automation-portfolio/issues"
+  },
+  "homepage": "https://github.com/Flornakasone/qa-automation-portfolio#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^26.2.0",
+    "dotenv": "^17.4.2"
+  },
+  "dependencies": {
+    "zod": "^4.4.3"
+  }
+}
