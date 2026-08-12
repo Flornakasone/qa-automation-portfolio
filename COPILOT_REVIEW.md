@@ -22,3 +22,14 @@
 **Corrección:** inicializar con `new Error('Max retries reached')` en la declaración.
 
 **Qué acepté sin cambios:** lógica de exponential backoff correcta, tipos genéricos correctos.
+
+
+## Día 3 — generateRandomTransaction factory
+
+**Prompt usado:** `// Factory that generates realistic Argentine financial transaction test data...`
+
+**Error encontrado:** status tipado como `string` en vez de `Transaction['status']` — TypeScript no infiere el tipo del array literal.
+
+**Corrección:** declarar el array con tipo explícito `Transaction['status'][]`.
+
+**Qué acepté sin cambios:** lógica de randomización, metadata realista, uso de crypto.randomUUID().
