@@ -19,4 +19,16 @@ test.describe('Users API', () => {
         const response = await request.get('https://reqres.in/api/users/999')
         expect(response.status()).toBe(404)
     })
+
+    test('user response passes all field validations', async ({ request }) => {
+        const response = await request.get('https://reqres.in/api/users/2')
+        const { data } = await response.json()
+
+        expect.soft(data.id).toBeGreaterThan(0)
+        expect.soft(data.email).toMatch(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)
+        expect.soft(data.first_name).toBeTruthy()
+        expect.soft(data.last_name).toBeTruthy()
+        expect.soft(data.avatar).toMatch(/^https?:\/\//)
+        })
 })
+
