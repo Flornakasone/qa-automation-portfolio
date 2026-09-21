@@ -1,17 +1,12 @@
-import { test, expect } from '@playwright/test'
-import { LoginPage } from '../../src/pages/LoginPage'
+import { test, expect } from '../../src/fixtures'
 
 test.describe('Login - the-internet', () => {
-  test('successful login with valid credentials', async ({ page }) => {
-    const loginPage = new LoginPage(page)
-    await loginPage.navigate()
+  test('successful login with valid credentials', async ({ loginPage }) => {
     await loginPage.login('tomsmith', 'SuperSecretPassword!')
     await loginPage.expectSuccessfulLogin()
   })
 
-  test('failed login shows error message', async ({ page }) => {
-    const loginPage = new LoginPage(page)
-    await loginPage.navigate()
+  test('failed login shows error message', async ({ loginPage }) => {
     await loginPage.login('wronguser', 'wrongpassword')
     await loginPage.expectFailedLogin()
   })
