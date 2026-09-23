@@ -1,6 +1,6 @@
 import { test as base } from '@playwright/test'
 import { LoginPage } from '../pages/the-internet/LoginPage'
-import { LoginPage as SauceDemoLoginPage } from '../pages/sauceDemo/LoginPage'
+import { LoginPage as SauceDemoLoginPage } from '../pages/saucedemo/LoginPage'
 
 type TestFixtures = {
   loginPage: LoginPage
