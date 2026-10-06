@@ -5,6 +5,7 @@ export class InventoryPage {
 
   get productPrice(): Locator { return this.page.getByTestId('inventory-item-price') }
   get filterDropdown(): Locator { return this.page.getByTestId('product-sort-container') }
+  get cartBadge(): Locator { return this.page.locator('.shopping_cart_badge') }
 
   constructor(page: Page) {
     this.page = page

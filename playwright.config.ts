@@ -28,6 +28,7 @@ export default defineConfig({
       use: {
         ...devices['Desktop Chrome'],
         baseURL: 'https://the-internet.herokuapp.com',
+        testIdAttribute: 'data-test'
       },
     },
     {
