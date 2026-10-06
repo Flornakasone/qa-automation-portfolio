@@ -24,11 +24,11 @@ export class LoginPage {
   }
 
   async expectSuccessfulLogin(): Promise<void> {
-    await expect(this.flashMessage).toContainText('You logged into a secure area!')
+    await expect(this.flashMessage).toContainText('You logged into a secure area!',{ timeout: 15000 })
     await expect(this.logoutLink).toBeVisible()
   }
 
   async expectFailedLogin(): Promise<void> {
-    await expect(this.flashMessage).toContainText('Your username is invalid!')
+    await expect(this.flashMessage).toContainText('Your username is invalid!', { timeout: 15000 })
   }
 }

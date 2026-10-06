@@ -30,6 +30,7 @@ export default defineConfig({
         baseURL: 'https://the-internet.herokuapp.com',
         testIdAttribute: 'data-test'
       },
+      timeout: 60000
     },
     {
       name: 'reconciliation',
