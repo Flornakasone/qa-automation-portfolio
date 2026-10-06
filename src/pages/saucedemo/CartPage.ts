@@ -4,6 +4,8 @@ export class CartPage {
   private readonly page: Page
 
   get checkoutButton(): Locator { return this.page.getByTestId('checkout') }
+  get itemPrice(): Locator { return this.page.getByTestId('inventory-item-price') }
+  get subtotalLabel(): Locator { return this.page.getByTestId('subtotal-label') }
 
   constructor(page: Page) {
     this.page = page

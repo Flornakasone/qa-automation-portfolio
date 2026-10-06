@@ -12,6 +12,9 @@ export class CheckoutPage {
   get finalMessage(): Locator { return this.page.getByTestId('checkout_complete_container') }
   get backHomeButton(): Locator { return this.page.getByTestId('back-to-products') }
   get generatePDFButton(): Locator { return this.page.getByTestId('generate-pdf') }
+  get subtotalLabel(): Locator { return this.page.getByTestId('subtotal-label') }
+  get itemPrice(): Locator { return this.page.getByTestId('inventory-item-price') }
+
 
   constructor(page: Page) {
     this.page = page
