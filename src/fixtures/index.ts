@@ -11,6 +11,7 @@ type TestFixtures = {
   sauceDemoInventoryPage: SauceDemoInventoryPage
   sauceDemoCartPage: SauceDemoCartPage
   sauceDemoCheckoutPage: SauceDemoCheckoutPage
+  sauceDemoCheckoutStepOnePage: SauceDemoCheckoutPage
 }
 
 export const test = base.extend<TestFixtures>({
@@ -21,45 +22,55 @@ export const test = base.extend<TestFixtures>({
   },
 
   sauceDemoLoginPage: async ({ page }, use) => {
-    const sauceDemoLoginPage = new SauceDemoLoginPage(page)
-    await sauceDemoLoginPage.navigate()
-    await use(sauceDemoLoginPage)
+        const sauceDemoLoginPage = new SauceDemoLoginPage(page)
+        await sauceDemoLoginPage.navigate()
+        await use(sauceDemoLoginPage)
   },
 
   sauceDemoInventoryPage: async ({ page }, use) => {
-    const loginPage = new SauceDemoLoginPage(page)
-    await loginPage.navigate()
-    await loginPage.login('standard_user', 'secret_sauce')
-    const sauceDemoInventoryPage = new SauceDemoInventoryPage(page)
-    await use(sauceDemoInventoryPage)
+        const loginPage = new SauceDemoLoginPage(page)
+        await loginPage.navigate()
+        await loginPage.login('standard_user', 'secret_sauce')
+        const sauceDemoInventoryPage = new SauceDemoInventoryPage(page)
+        await use(sauceDemoInventoryPage)
   },
 
   sauceDemoCartPage: async ({ page }, use) => {
-    const loginPage = new SauceDemoLoginPage(page)
-    await loginPage.navigate()
-    await loginPage.login('standard_user', 'secret_sauce')
-    const sauceDemoCartPage = new SauceDemoCartPage(page)
-    const inventoryPage = new SauceDemoInventoryPage(page)
-    await inventoryPage.addToCart('sauce-labs-backpack')
-    await page.goto('https://www.saucedemo.com/cart.html')
-    await use(sauceDemoCartPage)
+        const loginPage = new SauceDemoLoginPage(page)
+        await loginPage.navigate()
+        await loginPage.login('standard_user', 'secret_sauce')
+        const sauceDemoCartPage = new SauceDemoCartPage(page)
+        const inventoryPage = new SauceDemoInventoryPage(page)
+        await inventoryPage.addToCart('sauce-labs-backpack')
+        await page.goto('https://www.saucedemo.com/cart.html')
+        await use(sauceDemoCartPage)
+    },
 
-  },
+   sauceDemoCheckoutPage: async ({ page }, use) => {
+        const loginPage = new SauceDemoLoginPage(page)
+        await loginPage.navigate()
+        await loginPage.login('standard_user', 'secret_sauce')
+        const inventoryPage = new SauceDemoInventoryPage(page)
+        await inventoryPage.addToCart('sauce-labs-backpack')
+        await page.goto('https://www.saucedemo.com/checkout-step-one.html')
+        const fillInformation = new SauceDemoCheckoutPage(page)
+        await fillInformation.fillInformation('John', 'Doe', '12345')
+        await fillInformation.continueCheckout()
+        await use(fillInformation)  
+    },
 
-    sauceDemoCheckoutPage: async ({ page }, use) => {
-    const loginPage = new SauceDemoLoginPage(page)
-    await loginPage.navigate()
-    await loginPage.login('standard_user', 'secret_sauce')
-    const inventoryPage = new SauceDemoInventoryPage(page)
-    await inventoryPage.addToCart('sauce-labs-backpack')
-    await page.goto('https://www.saucedemo.com/checkout-step-one.html')
-    const fillInformation = new SauceDemoCheckoutPage(page)
-    await fillInformation.fillInformation('John', 'Doe', '12345')
-    await fillInformation.continueCheckout()
-    await use(fillInformation)  
-
-  }
-
+    sauceDemoCheckoutStepOnePage: async ({ page }, use) => {
+        const loginPage = new SauceDemoLoginPage(page)
+        await loginPage.navigate()
+        await loginPage.login('standard_user', 'secret_sauce')
+        const inventoryPage = new SauceDemoInventoryPage(page)
+        await inventoryPage.addToCart('sauce-labs-backpack')
+        await page.goto('https://www.saucedemo.com/cart.html')
+        const cartPage = new SauceDemoCartPage(page)
+        await cartPage.proceedToCheckout()
+        const sauceDemoCheckoutStepOnePage = new SauceDemoCheckoutPage(page)
+        await use(sauceDemoCheckoutStepOnePage)
+    }
 })
 
 export { expect } from '@playwright/test'

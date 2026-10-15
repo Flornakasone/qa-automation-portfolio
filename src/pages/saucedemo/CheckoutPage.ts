@@ -1,4 +1,4 @@
-import { type Page, type Locator } from '@playwright/test'
+import { type Page, type Locator, expect } from '@playwright/test'
 
 export class CheckoutPage {
   private readonly page: Page
@@ -9,7 +9,7 @@ export class CheckoutPage {
   get cancelButton(): Locator { return this.page.getByTestId('cancel') }
   get continueButton(): Locator { return this.page.getByTestId('continue') }
   get finishButton(): Locator { return this.page.getByTestId('finish') }
-  get finalMessage(): Locator { return this.page.getByTestId('checkout_complete_container') }
+  get finalMessage(): Locator { return this.page.getByTestId('complete-header') }
   get backHomeButton(): Locator { return this.page.getByTestId('back-to-products') }
   get generatePDFButton(): Locator { return this.page.getByTestId('generate-pdf') }
   get subtotalLabel(): Locator { return this.page.getByTestId('subtotal-label') }
@@ -49,4 +49,16 @@ export class CheckoutPage {
   async generatePDF(): Promise<void> {
     await this.generatePDFButton.click()
   }
+
+  async expectFinalMessage(): Promise<void> {
+  await expect(this.finalMessage).toBeVisible()
+  }
+
+  async expectErrorMessage(): Promise<void> {
+  await expect(this.page.getByTestId('error')).toBeVisible()
+  }
+
+  async expectRedirectToCart(): Promise<void> {
+  await expect(this.page).toHaveURL(/cart/)
+ }
 }
